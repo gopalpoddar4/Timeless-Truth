@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "698670507549",
+    "firebase_url": "https://timeless-truth-e05a9-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "timeless-truth-e05a9",
+    "storage_bucket": "timeless-truth-e05a9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698670507549:android:29ee51b54629d01b5f88f4",
+        "android_client_info": {
+          "package_name": "com.gopalpoddar4.timelesstruth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChsIwlb4ekcJNwOHeB_8QoapJdqCBQm3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

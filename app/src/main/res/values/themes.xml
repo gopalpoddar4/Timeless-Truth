@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.TimelessTruth" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="android:statusBarColor">@color/main_color</item>
+        <item name="colorAccent">@color/main_color</item>
+    </style>
+
+    <style name="Theme.TimelessTruth" parent="Base.Theme.TimelessTruth" />
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+
+        <item name="android:background">@null</item>
+        <item name="queryBackground">@null</item>
+        <item name="android:elevation">0dp</item>
+
+    </style>
+</resources>
