@@ -7,10 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.gopalpoddar4.timelesstruth.Adapters.NewsAdapter.VH
 import com.gopalpoddar4.timelesstruth.Model.Article
+import com.gopalpoddar4.timelesstruth.Model.FavModel
 import com.gopalpoddar4.timelesstruth.R
 
-class NewsAdapter(private val artical: List<Article>, private val onItemClick:(Article)-> Unit): RecyclerView.Adapter<NewsAdapter.VH>() {
+class FavAdapter(private val artical: List<FavModel>, private val onItemClick:(FavModel)-> Unit,private val onLongClick:(Int)-> Unit): RecyclerView.Adapter<FavAdapter.VH>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -23,18 +25,26 @@ class NewsAdapter(private val artical: List<Article>, private val onItemClick:(A
         holder: VH,
         position: Int
     ) {
-        val news: Article = artical[position]
-        holder.newsTitle.text = news.title
-        holder.newsSource.text = news.source.name
+         val news = artical[position]
+        holder.newsTitle.text = news.newsTitle
+        holder.newsSource.text = news.newsSource
         holder.itemView.setOnClickListener {
-             onItemClick(news)
+            onItemClick(news)
         }
-        Glide.with(holder.itemView.context).load(news.urlToImage).into(holder.newsImage)
+        holder.itemView.setOnLongClickListener {
+            onLongClick(news.id)
+
+            true
+        }
+
+
+        Glide.with(holder.itemView.context).load(news.imageUrl).into(holder.newsImage)
     }
 
     override fun getItemCount(): Int {
         return artical.size
     }
+
 
     class VH(itemView: View): RecyclerView.ViewHolder(itemView){
         val newsImage = itemView.findViewById<ImageView>(R.id.news_image)
@@ -43,4 +53,5 @@ class NewsAdapter(private val artical: List<Article>, private val onItemClick:(A
 
 
     }
+
 }

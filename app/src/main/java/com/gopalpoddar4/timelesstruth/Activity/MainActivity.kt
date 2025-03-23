@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,7 @@ import com.gopalpoddar4.timelesstruth.API.RetrofitHelper
 import com.gopalpoddar4.timelesstruth.Adapters.CategoryAdapter
 import com.gopalpoddar4.timelesstruth.Adapters.NewsAdapter
 import com.gopalpoddar4.timelesstruth.Model.CategoryModel
+import com.gopalpoddar4.timelesstruth.NewsApplication
 import com.gopalpoddar4.timelesstruth.VMRepo.NewsRepo
 import com.gopalpoddar4.timelesstruth.VMRepo.NewsVMFactory
 import com.gopalpoddar4.timelesstruth.VMRepo.NewsViewModel
@@ -54,6 +56,11 @@ class MainActivity : AppCompatActivity() {
         progessBar=findViewById(R.id.progressBar)
         recyclerView=findViewById(R.id.recyclerView)
         categoryRcv=findViewById(R.id.categoryRcv)
+        val favBtn = findViewById<ImageView>(R.id.favroiteBtn)
+        favBtn.setOnClickListener {
+            val favIntent = Intent(this, FavrioutActivity::class.java)
+            startActivity(favIntent)
+        }
 
         categoryRcv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -62,9 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         fetchCategory()
 
-
-        val api = RetrofitHelper.getAPI().create(APIinterfcae::class.java)
-        val repo = NewsRepo(api)
+        val repo = (application as NewsApplication).repo
         viewModel = ViewModelProvider(this, NewsVMFactory(repo))[NewsViewModel::class.java]
 
         SearchNews("news")
@@ -121,7 +126,10 @@ class MainActivity : AppCompatActivity() {
             try {
                 recyclerView.adapter = NewsAdapter(artical, {
                     val intent = Intent(this, NewsActivity::class.java)
-                    intent.putExtra("url", it)
+                    intent.putExtra("url", it.url)
+                    intent.putExtra("imageurl",it.urlToImage)
+                    intent.putExtra("title",it.title)
+                    intent.putExtra("source",it.source.name)
                     startActivity(intent)
                 })
                 changeProgress(false)
